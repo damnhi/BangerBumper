@@ -1,47 +1,97 @@
 @MvcRatings_Host_Address = http://localhost:5161
 
-POST {{MvcRatings_Host_Address}}/api/Rating
-Content-Type: application/json
-Accept: application/json
-
-{
-  "Id": 10,
-  "UserId": 3,
-  "SongId": 3,
-  "Value": 4,
-  "Date": "2021-01-01",
-  "Comment": "Great song!"
-}
-
-###
-
-GET {{MvcRatings_Host_Address}}/api/Rating
-Accept: application/json
-
-###
+###USER:
 POST {{MvcRatings_Host_Address}}/api/User
 Content-Type: application/json
 Accept: application/json
 
 {
-  "FirstName": "John",
-  "LastName": "Doe"
+  "FirstName": "Kaczor",
+  "LastName": "Donald"
 }
-
-###
-DELETE {{MvcRatings_Host_Address}}/api/User/2
-Accept: application/json
-
 ###
 GET {{MvcRatings_Host_Address}}/api/User
 Accept: application/json
-
 ###
-PUT {{MvcRatings_Host_Address}}/api/User/1
+DELETE {{MvcRatings_Host_Address}}/api/User/5
+Accept: application/json
+###
+PUT {{MvcRatings_Host_Address}}/api/User/4
 Content-Type: application/json
 Accept: application/json
 
+{
+  "Id": 4,
+  "FirstName": "Jan",
+  "LastName": "Ciasto"
+}
+
+
+
+
+###ARTIST:
+POST {{MvcRatings_Host_Address}}/api/Artist
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Name": "Kendrick Lamar",
+  "Bio": "Compton rapper"
+}
 ###
+GET {{MvcRatings_Host_Address}}/api/Artist
+Accept: application/json
+###
+DELETE {{MvcRatings_Host_Address}}/api/Artist/5
+Accept: application/json
+###
+PUT {{MvcRatings_Host_Address}}/api/Artist/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Id": 1,
+  "Name": "Kendrick Lamar",
+  "Bio": "Compton rapper"
+}
+
+
+
+
+
+###ALBUM:
+POST {{MvcRatings_Host_Address}}/api/Album
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Title": "To Pimp a Butterfly",
+  "ArtistId": 1,
+  "ReleaseDate": "2015-03-15"
+}
+###
+GET {{MvcRatings_Host_Address}}/api/Album
+Accept: application/json
+###
+DELETE {{MvcRatings_Host_Address}}/api/Album/1
+Accept: application/json
+###
+PUT {{MvcRatings_Host_Address}}/api/Album/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Id": 1,
+  "Title": "To Pimp a Butterfly",
+  "ArtistId": 1,
+  "ReleaseDate": "2015-03-15"
+}
+
+
+
+
+
+###SONG:
 POST {{MvcRatings_Host_Address}}/api/Song
 Content-Type: application/json
 Accept: application/json
@@ -49,23 +99,60 @@ Accept: application/json
 {
   "Title": "Song 1",
   "ArtistId": 1,
+  "AlbumId": 1,
+  "ReleaseDate": "2021-01-01",
+  "Duration": "00:03:30"
+}
+###
+GET {{MvcRatings_Host_Address}}/api/Song
+Accept: application/json
+###
+DELETE {{MvcRatings_Host_Address}}/api/Song/1
+Accept: application/json
+###
+PUT {{MvcRatings_Host_Address}}/api/Song/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Id": 1,
+  "Title": "Song 1",
+  "ArtistId": 1,
+  "AlbumId": 1,
   "ReleaseDate": "2021-01-01",
   "Duration": "00:03:30"
 }
 
-###
+
+
+###RATING:
 POST {{MvcRatings_Host_Address}}/api/Rating
 Content-Type: application/json
 Accept: application/json
 
 {
-  "Value": 5,
+  "UserId": 1,
+  "SongId": 3,
+  "Value": 4,
+  "Date": "2022-03-01",
+  "Comment": "Great song whoah!"
+}
+###
+GET {{MvcRatings_Host_Address}}/api/Rating
+Accept: application/json
+###
+DELETE {{MvcRatings_Host_Address}}/api/Rating/1
+Accept: application/json
+###
+PUT {{MvcRatings_Host_Address}}/api/Rating/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Id": 1,
+  "Value": 1,
   "UserId": 1,
   "SongId": 1,
-  "Date": "2021-01-01",
-  "Comment": "Great song!"
+  "Date": "2022-03-01",
+  "Comment": "Great song whoah!"
 }
-
-###
-GET {{MvcRatings_Host_Address}}/api/Song
-Accept: application/json

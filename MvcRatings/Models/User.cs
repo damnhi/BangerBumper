@@ -8,8 +8,7 @@ namespace BangerBumper.WebAPP.MVC.Models
 
         [Display(Name = "First Name")] public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        [Display(Name = "Last Name")] public string LastName { get; set; }
 
         public ICollection<Rating>? Ratings { get; set; }
 

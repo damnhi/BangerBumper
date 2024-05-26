@@ -28,7 +28,8 @@ namespace MvcRatings.Controllers
           {
               return NotFound();
           }
-            return await _context.Album.ToListAsync();
+          
+          return await _context.Album.ToListAsync();
         }
 
         // GET: api/Album/5
