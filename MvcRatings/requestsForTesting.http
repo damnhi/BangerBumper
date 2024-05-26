@@ -1,0 +1,71 @@
+@MvcRatings_Host_Address = http://localhost:5161
+
+POST {{MvcRatings_Host_Address}}/api/Rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Id": 10,
+  "UserId": 3,
+  "SongId": 3,
+  "Value": 4,
+  "Date": "2021-01-01",
+  "Comment": "Great song!"
+}
+
+###
+
+GET {{MvcRatings_Host_Address}}/api/Rating
+Accept: application/json
+
+###
+POST {{MvcRatings_Host_Address}}/api/User
+Content-Type: application/json
+Accept: application/json
+
+{
+  "FirstName": "John",
+  "LastName": "Doe"
+}
+
+###
+DELETE {{MvcRatings_Host_Address}}/api/User/2
+Accept: application/json
+
+###
+GET {{MvcRatings_Host_Address}}/api/User
+Accept: application/json
+
+###
+PUT {{MvcRatings_Host_Address}}/api/User/1
+Content-Type: application/json
+Accept: application/json
+
+###
+POST {{MvcRatings_Host_Address}}/api/Song
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Title": "Song 1",
+  "ArtistId": 1,
+  "ReleaseDate": "2021-01-01",
+  "Duration": "00:03:30"
+}
+
+###
+POST {{MvcRatings_Host_Address}}/api/Rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Value": 5,
+  "UserId": 1,
+  "SongId": 1,
+  "Date": "2021-01-01",
+  "Comment": "Great song!"
+}
+
+###
+GET {{MvcRatings_Host_Address}}/api/Song
+Accept: application/json
