@@ -7,7 +7,8 @@ namespace BangerBumper.WebAPP.MVC.Models
         [Key] public int Id { get; set; }
 
         [Display(Name = "Title")] public string Title { get; set; }
-
+        
+        [Display(Name = "ArtistId")] public int ArtistId { get; set; }
         [Display(Name = "Artist")]
         public Artist? Artist {
             get;

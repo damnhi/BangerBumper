@@ -6,8 +6,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "FirstName": "Kaczor",
-  "LastName": "Donald"
+  "FirstName": "Witold",
+  "LastName": "Tacikiewicz"
 }
 ###
 GET {{MvcRatings_Host_Address}}/api/User
@@ -35,14 +35,14 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Name": "Kendrick Lamar",
-  "Bio": "Compton rapper"
+  "Name": "Chief Keef",
+  "Bio": "Sosa! O-Block! Bang bang!"
 }
 ###
 GET {{MvcRatings_Host_Address}}/api/Artist
 Accept: application/json
 ###
-DELETE {{MvcRatings_Host_Address}}/api/Artist/5
+DELETE {{MvcRatings_Host_Address}}/api/Artist/7
 Accept: application/json
 ###
 PUT {{MvcRatings_Host_Address}}/api/Artist/1
@@ -52,7 +52,7 @@ Accept: application/json
 {
   "Id": 1,
   "Name": "Kendrick Lamar",
-  "Bio": "Compton rapper"
+  "Bio": "Baby Keem's cousin"
 }
 
 
@@ -65,15 +65,15 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Title": "To Pimp a Butterfly",
-  "ArtistId": 1,
-  "ReleaseDate": "2015-03-15"
+  "Title": "Almighty So 2",
+  "ArtistId": 5,
+  "ReleaseDate": "2024-05-10"
 }
 ###
 GET {{MvcRatings_Host_Address}}/api/Album
 Accept: application/json
 ###
-DELETE {{MvcRatings_Host_Address}}/api/Album/1
+DELETE {{MvcRatings_Host_Address}}/api/Album/9
 Accept: application/json
 ###
 PUT {{MvcRatings_Host_Address}}/api/Album/1
@@ -97,11 +97,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Title": "Song 1",
-  "ArtistId": 1,
-  "AlbumId": 1,
-  "ReleaseDate": "2021-01-01",
-  "Duration": "00:03:30"
+  "Title": "Hate Bein' Sober",
+  "ArtistId": 5,
+  "AlbumId": 8,
+  "ReleaseDate": "2012-12-18",
+  "Duration": "00:04:40"
 }
 ###
 GET {{MvcRatings_Host_Address}}/api/Song
@@ -131,11 +131,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "UserId": 1,
-  "SongId": 3,
-  "Value": 4,
-  "Date": "2022-03-01",
-  "Comment": "Great song whoah!"
+  "UserId": 4,
+  "SongId": 22,
+  "Value": 3,
+  "Date": "2022-12-05",
+  "Comment":  "random review boring"
 }
 ###
 GET {{MvcRatings_Host_Address}}/api/Rating

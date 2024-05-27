@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MvcRatings.Migrations
 {
     [DbContext(typeof(ContextDb))]
-    partial class ContextDbModelSnapshot : ModelSnapshot
+    [Migration("20240526231008_ArtistIdLineInAlbumTest")]
+    partial class ArtistIdLineInAlbumTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -71,10 +74,10 @@ namespace MvcRatings.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("SongId")
+                    b.Property<int?>("SongId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Value")
@@ -98,7 +101,7 @@ namespace MvcRatings.Migrations
                     b.Property<int?>("AlbumId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ArtistId")
+                    b.Property<int?>("ArtistId")
                         .HasColumnType("INTEGER");
 
                     b.Property<TimeSpan>("Duration")
@@ -154,15 +157,11 @@ namespace MvcRatings.Migrations
                 {
                     b.HasOne("BangerBumper.WebAPP.MVC.Models.Song", "Song")
                         .WithMany("Ratings")
-                        .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SongId");
 
                     b.HasOne("BangerBumper.WebAPP.MVC.Models.User", "User")
                         .WithMany("Ratings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Song");
 
@@ -177,9 +176,7 @@ namespace MvcRatings.Migrations
 
                     b.HasOne("BangerBumper.WebAPP.MVC.Models.Artist", "Artist")
                         .WithMany("Songs")
-                        .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArtistId");
 
                     b.Navigation("Album");
 
