@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BangerBumper.WebAPP.MVC.Models;
+using MvcRatings.Models;
 
 namespace MvcRatings.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlbumController : ControllerBase
+    public class AlbumController : Controller
     {
         private readonly ContextDb _context;
 

@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BangerBumper.WebAPP.MVC.Models;
+using MvcRatings.Models;
 
 namespace MvcRatings.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RatingController : ControllerBase
+    public class RatingController : Controller
     {
         private readonly ContextDb _context;
 
@@ -24,6 +24,12 @@ namespace MvcRatings.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rating>>> GetRating()
         {
+            /*
+            var xd = _context.Rating.Include(r => r.Song).ToList().First().Song; |teraz działa bez include nie działa
+
+            var aa = _context.Rating.Where(r => r.Song.Title == "asdasd")  |działa  .ToList().First().Song; |nie działa potrzebuje include
+            */
+            
           if (_context.Rating == null)
           {
               return NotFound();

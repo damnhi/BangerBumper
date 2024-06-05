@@ -1,0 +1,36 @@
+@model IEnumerable<MvcRatings.Models.User>
+
+@{
+    ViewData["Title"] = "TestUser";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<p>Testy Atomowe na naszych drogich użytkownikach</p>
+
+<li class="nav-item">
+    <a class="button" href="@Url.Action("GetUser", "User")">Show me pls</a>
+</li>
+<li class="nav-item">
+    <a class="button" href="@Url.Action("ShowUsers", "User")">TestUser</a>
+</li>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+        </tr>
+    }
+    </tbody>
+</table>

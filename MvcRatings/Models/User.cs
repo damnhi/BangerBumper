@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BangerBumper.WebAPP.MVC.Models
+namespace MvcRatings.Models
 {
     public class User
     {

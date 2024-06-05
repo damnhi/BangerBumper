@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BangerBumper.WebAPP.MVC.Models;
+using MvcRatings.Models;
 
 namespace MvcRatings.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
         private readonly ContextDb _context;
 
@@ -29,6 +29,11 @@ namespace MvcRatings.Controllers
               return NotFound();
           }
             return await _context.User.ToListAsync();
+        }
+        public async Task<IActionResult> ShowUsers()
+        {
+            var users = await _context.User.ToListAsync();
+            return View(users); // Zwracanie widoku TestUser z listą użytkowników
         }
 
         // GET: api/User/5
