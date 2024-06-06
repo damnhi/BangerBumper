@@ -20,10 +20,24 @@ namespace MvcRatings.Controllers
         {
             _context = context;
         }
+        // GET: Song/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
         
+        // POST: Song/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            var songs = await _context.Song
+                .Include(s => s.Artist) 
+                .Where(s => s.Title.Contains(SearchPhrase))
+                .ToListAsync();
+            return PartialView("_SearchResults", songs);
+        }
         public ActionResult AddSong(int id)
         {
-            var al = _context.Album.Where(a => a.Id == id);
+            Album al = _context.Album.Where(a => a.Id == id).ToList().First();
             return View(al);
         }
         
