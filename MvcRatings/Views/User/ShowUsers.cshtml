@@ -27,6 +27,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
+            <td>
+                @Html.ActionLink(
+                "Delete",
+                "RemoveUser",
+                "User",
+                new { confirm = true, id = item.Id },
+                new { onclick = "return confirm('Do you really want to delete this User?')" })
+            </td>
         </tr>
     }
     </tbody>

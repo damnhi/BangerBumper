@@ -1,0 +1,42 @@
+@model IEnumerable<MvcRatings.Models.Album>
+@{
+    ViewData["Title"] = "AlbumHome";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to BangerBumper!</h1>
+    <p>New releases:</p>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Artist.Name)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Take(5))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.Name)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

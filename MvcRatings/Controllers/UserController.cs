@@ -33,6 +33,28 @@ namespace MvcRatings.Controllers
             return View(await users.ToListAsync());
         }
         
+        public async Task<IActionResult> RemoveUser(bool confirm, Guid id)
+        {
+            if (confirm)
+            {
+                if (_context.User == null)
+                {
+                    return NotFound();
+                }
+
+                var us = await _context.User.FindAsync(id);
+                if (us == null)
+                {
+                    return NotFound();
+                }
+                
+                _context.User.Remove(us);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("ShowUsers");
+        }
+        
         //Query for API
         
         [Route("api/[controller]")]

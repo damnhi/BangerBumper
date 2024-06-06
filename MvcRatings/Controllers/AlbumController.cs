@@ -34,6 +34,19 @@ namespace MvcRatings.Controllers
 
             return View(albums);
         }
+        public async Task<IActionResult> AlbumHome()
+        {
+            if (_context.Album == null)
+            {
+                return Problem("Entity set 'BangerBumper.Album'  is null.");
+            }
+
+            var albums = await _context.Album
+                .Include(a => a.Artist).OrderByDescending(o=>o.ReleaseDate) // Ładowanie informacji o artyście dla każdego albumu
+                .ToListAsync();
+
+            return View(albums);
+        }
         public ActionResult AddAlbum()
         {
             return View();
@@ -68,9 +81,9 @@ namespace MvcRatings.Controllers
         
         public ActionResult EditAlbum(Album std)
         {
-            var student = _context.Album.Where(s => s.Id == std.Id).FirstOrDefault();
+            var album = _context.Album.Where(s => s.Id == std.Id).FirstOrDefault();
             
-            _context.Album.Remove(student);
+            _context.Album.Remove(album);
             _context.Album.Add(std);
             _context.SaveChanges();
 
@@ -91,7 +104,7 @@ namespace MvcRatings.Controllers
                 {
                     return NotFound();
                 }
-
+                
                 _context.Album.Remove(album);
                 await _context.SaveChangesAsync();
             }

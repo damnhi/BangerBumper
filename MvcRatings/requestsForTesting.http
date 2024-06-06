@@ -13,7 +13,7 @@ Accept: application/json
 GET {{MvcRatings_Host_Address}}/api/User
 Accept: application/json
 ###
-DELETE {{MvcRatings_Host_Address}}/api/User/5
+DELETE {{MvcRatings_Host_Address}}/api/User/1
 Accept: application/json
 ###
 PUT {{MvcRatings_Host_Address}}/api/User/4
@@ -35,8 +35,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Name": "Chief Keef",
-  "Bio": "Sosa! O-Block! Bang bang!"
+  "Name": "Marian Lichtman",
+  "Bio": "jepepej"
 }
 ###
 GET {{MvcRatings_Host_Address}}/api/Artist
