@@ -1,0 +1,23 @@
+@model MvcRatings.Models.Album
+@{
+    ViewData["Title"] = "AddAlbum";
+}
+
+<h1>Add a new album:</h1>
+
+<div class="container" style="width:40%;margin-top:2%">
+
+    @using (Html.BeginForm("SaveAlbum", "Album", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.ArtistId,new { @class = "form-control", @placeholder = "ArtistId" })
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "Title" })
+        @Html.TextBoxFor(model => model.ReleaseDate, new { @class = "form-control", @placeholder = "Release Date" })
+
+        <input type="submit" value="Submit" class="btn btn-block btn-primary" />
+
+    }
+
+</div>
+<div>
+    @Html.ActionLink("Back to List", "AlbumTestsView")
+</div>

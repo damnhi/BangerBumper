@@ -10,8 +10,7 @@ using MvcRatings.Data;
 
 namespace MvcRatings.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    
     public class UserController : Controller
     {
         private readonly ContextDb _context;
@@ -20,7 +19,23 @@ namespace MvcRatings.Controllers
         {
             _context = context;
         }
+        
+        public async Task<IActionResult> ShowUsers()
+        {
+            if (_context.User == null)
+            {
+                return Problem("Entity set 'BangerBumper.User'  is null.");
+            }
+            
+            var users = from u in _context.User
+                select u;
 
+            return View(await users.ToListAsync());
+        }
+        
+        //Query for API
+        
+        [Route("api/[controller]")]
         // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
@@ -31,12 +46,7 @@ namespace MvcRatings.Controllers
           }
             return await _context.User.ToListAsync();
         }
-        public async Task<IActionResult> ShowUsers()
-        {
-            var users = await _context.User.ToListAsync();
-            return View(users); // Zwracanie widoku TestUser z listą użytkowników
-        }
-
+        
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)

@@ -1,0 +1,52 @@
+@model IEnumerable<MvcRatings.Models.Album>
+@{
+    ViewData["Title"] = "AlbumTestsView";
+}
+
+<h1>Available albums:</h1>
+
+<p>
+    <a type="button" class="btn btn-primary" asp-action="AddAlbum">Add new album</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Artist.Name)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.Name)
+            </td>
+            <td>
+                <a asp-action="EditAlbumView" asp-route-id="@item.Id">Edit</a>
+                
+                @Html.ActionLink(
+                "Delete",
+                "RemoveAlbum",
+                "Album",
+                new { confirm = true, id = item.Id },
+                new { onclick = "return confirm('Do you really want to delete this Album?')" })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

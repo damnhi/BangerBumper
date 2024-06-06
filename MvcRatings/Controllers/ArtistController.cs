@@ -9,6 +9,8 @@ using MvcRatings.Models;
 using MvcRatings.Data;
 //
 
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace MvcRatings.Controllers
 {
     [Route("api/[controller]")]

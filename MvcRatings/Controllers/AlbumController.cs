@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcRatings.Models;
 using MvcRatings.Data;
+using SQLitePCL;
 
 namespace MvcRatings.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class AlbumController : Controller
     {
         private readonly ContextDb _context;
@@ -20,7 +20,88 @@ namespace MvcRatings.Controllers
         {
             _context = context;
         }
+        
+        public async Task<IActionResult> AlbumTestsView()
+        {
+            if (_context.Album == null)
+            {
+                return Problem("Entity set 'BangerBumper.Album'  is null.");
+            }
 
+            var albums = await _context.Album
+                .Include(a => a.Artist) // Ładowanie informacji o artyście dla każdego albumu
+                .ToListAsync();
+
+            return View(albums);
+        }
+        public ActionResult AddAlbum()
+        {
+            return View();
+        }
+        
+        public async Task<ActionResult<Album>> SaveAlbum(Album model)
+        {
+            try
+            {
+                Album a = new Album();
+                a.Title = model.Title;
+                a.ReleaseDate = model.ReleaseDate;
+                a.ArtistId = model.ArtistId;
+                _context.Album.Add(a);
+                _context.SaveChanges();
+                return RedirectToAction("AlbumTestsView");
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+        
+        public ActionResult EditAlbumView(int Id)
+        {
+            var std = _context.Album.Where(s => s.Id == Id).FirstOrDefault();
+    
+            return View(std);
+        }
+        
+        public ActionResult EditAlbum(Album std)
+        {
+            var student = _context.Album.Where(s => s.Id == std.Id).FirstOrDefault();
+            
+            _context.Album.Remove(student);
+            _context.Album.Add(std);
+            _context.SaveChanges();
+
+            return RedirectToAction("AlbumTestsView");
+        }
+        
+        public async Task<IActionResult> RemoveAlbum(bool confirm, int id)
+        {
+            if (confirm)
+            {
+                if (_context.Album == null)
+                {
+                    return NotFound();
+                }
+
+                var album = await _context.Album.FindAsync(id);
+                if (album == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Album.Remove(album);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("AlbumTestsView");
+        }
+        
+        //Query for API
+        
+        [Route("api/[controller]")]
         // GET: api/Album
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Album>>> GetAlbum()
