@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcRatings.Models;
+using MvcRatings.Data;
 using SQLitePCL;
 
 namespace MvcRatings.Controllers

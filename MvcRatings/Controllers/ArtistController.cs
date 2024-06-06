@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MvcRatings.Models;
+using MvcRatings.Data;
+//
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 

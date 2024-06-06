@@ -11,7 +11,7 @@ namespace MvcRatings.Models
 
         [Display(Name = "Value")] public int Value { get; set; }
         
-        [Display(Name = "UserId")] public int UserId { get; set; }
+        [Display(Name = "UserId")] public Guid UserId { get; set; }
         [Display(Name = "User")] public User? User { get; set; }
         
         [Display(Name = "SongId")] public int SongId { get; set; }
