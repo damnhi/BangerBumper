@@ -10,8 +10,8 @@ using MvcRatings.Data;
 
 namespace MvcRatings.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    // [Route("api/[controller]")]
+    // [ApiController]
     public class SongController : Controller
     {
         private readonly ContextDb _context;
@@ -20,7 +20,35 @@ namespace MvcRatings.Controllers
         {
             _context = context;
         }
-
+        
+        public ActionResult AddSong(int id)
+        {
+            var al = _context.Album.Where(a => a.Id == id);
+            return View(al);
+        }
+        
+        public async Task<ActionResult<Album>> SaveSong(Song model)
+        {
+            try
+            {
+                Song s = new Song();
+                s.Title = model.Title;
+                s.ReleaseDate = model.ReleaseDate;
+                s.ArtistId = model.ArtistId;
+                s.AlbumId = model.AlbumId;
+                s.Duration = model.Duration;
+                
+                _context.Song.Add(s);
+                _context.SaveChanges();
+                return RedirectToAction("DetailsAlbum","Album", model.AlbumId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        
         // GET: api/Song
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Song>>> GetSong()

@@ -1,0 +1,41 @@
+@model MvcRatings.Controllers.Asongs
+@{
+    ViewData["Title"] = "DetailsAlbum";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Html.DisplayFor(modelItem => modelItem.al[0].Title)</h1>
+    <h3 class="display-6"> by: @Html.DisplayFor(modelItem => modelItem.al[0].Artist.Name)</h3>
+    <h3 class="display-8"> by: @Html.DisplayFor(modelItem => modelItem.al[0].ReleaseDate)</h3>
+    <p>Track list:</p>
+</div>
+
+<p>
+    <a type="button" class="btn btn-primary" asp-controller="Song" asp-action="AddSong" asp-route-id="@Model.al[0].Id" >Add missing song</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sos[0].Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sos[0].Duration)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.sos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

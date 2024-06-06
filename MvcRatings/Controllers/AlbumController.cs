@@ -10,8 +10,19 @@ using MvcRatings.Models;
 using MvcRatings.Data;
 using SQLitePCL;
 
+
 namespace MvcRatings.Controllers
 {
+    public class Asongs
+    {
+        public List<Album> al {get;set;}
+        public List<Song> sos {get;set;}
+        public Asongs()
+        {
+            this.al = new List<Album>();
+            this.sos = new List<Song>();
+        }
+    }
     public class AlbumController : Controller
     {
         private readonly ContextDb _context;
@@ -29,11 +40,25 @@ namespace MvcRatings.Controllers
             }
 
             var albums = await _context.Album
-                .Include(a => a.Artist) // Ładowanie informacji o artyście dla każdego albumu
+                .Include(a => a.Artist) 
                 .ToListAsync();
 
             return View(albums);
         }
+        public async Task<IActionResult> DetailsAlbum(int Id)
+        {
+            if (_context.Album == null)
+            {
+                return Problem("Entity set 'BangerBumper.Album'  is null.");
+            }
+
+            Asongs ass = new Asongs();
+            
+            ass.al = _context.Album.Where(a => a.Id == Id).Include(o=>o.Artist).ToList();
+            ass.sos = await _context.Song.Include(r => r.Album).Where(r => r.Album.Id == Id).Include(o=>o.Artist).ToListAsync();
+            return View(ass);
+        }
+        
         public async Task<IActionResult> AlbumHome()
         {
             if (_context.Album == null)

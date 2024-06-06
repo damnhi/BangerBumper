@@ -35,8 +35,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Name": "Marian Lichtman",
-  "Bio": "jepepej"
+  "Name": "Gościu",
+  "Bio": "noelo"
 }
 ###
 GET {{MvcRatings_Host_Address}}/api/Artist
@@ -65,7 +65,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "Title": "Almighty So 2",
+  "Title": "GonGo600",
   "ArtistId": 5,
   "ReleaseDate": "2024-05-10"
 }
@@ -98,9 +98,9 @@ Accept: application/json
 
 {
   "Title": "Hate Bein' Sober",
-  "ArtistId": 5,
-  "AlbumId": 8,
-  "ReleaseDate": "2012-12-18",
+  "ArtistId": 1,
+  "AlbumId": 1,
+  "ReleaseDate": "2021-01-01",
   "Duration": "00:04:40"
 }
 ###
