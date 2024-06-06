@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MvcRatings.Models;
 
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace MvcRatings.Controllers
 {
     [Route("api/[controller]")]
