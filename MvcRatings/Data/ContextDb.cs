@@ -4,10 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MvcRatings.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-    public class ContextDb : DbContext
+namespace MvcRatings.Data
+{
+    public class ContextDb : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
-        public ContextDb (DbContextOptions<ContextDb> options)
+        public ContextDb(DbContextOptions<ContextDb> options)
             : base(options)
         {
         }
@@ -16,7 +20,8 @@ using MvcRatings.Models;
         public DbSet<MvcRatings.Models.Album> Album { get; set; } = default!;
         public DbSet<MvcRatings.Models.Artist> Artist { get; set; } = default!;
         public DbSet<MvcRatings.Models.Song> Song { get; set; } = default!;
-        public DbSet<MvcRatings.Models.User> User { get; set; } = default!; 
-        
+        public DbSet<MvcRatings.Models.User> User { get; set; } = default!;
+
 
     }
+}
