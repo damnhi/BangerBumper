@@ -1,23 +1,25 @@
-@model MvcRatings.Models.Album
+@model MvcRatings.Controllers.SongMaker
 @{
     ViewData["Title"] = "AddSong";
 }
 
-<h1>Add song to: </h1>
+<h1>Add song to: @Model.al.Title </h1>
 
 <div class="container" style="width:40%;margin-top:2%">
 
     @using (Html.BeginForm("SaveSong", "Song", FormMethod.Post))
-    {
-        @Html.TextBoxFor(model => model.ArtistId,new { @class = "form-control", @placeholder = "ArtistId" })
-        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "Title" })
-        @Html.TextBoxFor(model => model.ReleaseDate, new { @class = "form-control", @placeholder = "Release Date" })
-
+    {   
+        @Html.HiddenFor(model => model.al.Id)
+        @Html.HiddenFor(model => model.al.ArtistId)
+        @Html.HiddenFor(model => model.al.ReleaseDate)
+        @Html.TextBoxFor(model => model.tit, new { @class = "form-control", @placeholder = "Title" })
+        @Html.TextBoxFor(model => model.dur, new { @class = "form-control", @placeholder = "Duration" })
         <input type="submit" value="Submit" class="btn btn-block btn-primary" />
 
     }
 
 </div>
+
 <div>
-    @Html.ActionLink("Back to List", "AlbumTestsView")
+    <a type="button" class="btn btn-primary" asp-controller="Album" asp-action="DetailsAlbum" asp-route-id="@Model.al.Id" >Go back to the album</a>
 </div>

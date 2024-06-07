@@ -6,7 +6,7 @@
 <div class="text-center">
     <h1 class="display-4">@Html.DisplayFor(modelItem => modelItem.al[0].Title)</h1>
     <h3 class="display-6"> by: @Html.DisplayFor(modelItem => modelItem.al[0].Artist.Name)</h3>
-    <h3 class="display-8"> by: @Html.DisplayFor(modelItem => modelItem.al[0].ReleaseDate)</h3>
+    <h5 class="display-8"> released on: @Html.DisplayFor(modelItem => modelItem.al[0].ReleaseDate)</h5>
     <p>Track list:</p>
 </div>
 
@@ -39,3 +39,7 @@
     }
     </tbody>
 </table>
+
+<p>
+    <a type="button" class="btn btn-primary" asp-controller="Album" asp-action="AlbumTestsView"  >Go back to all albums</a>
+</p>
