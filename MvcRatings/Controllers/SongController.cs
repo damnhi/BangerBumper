@@ -10,6 +10,12 @@ using MvcRatings.Data;
 
 namespace MvcRatings.Controllers
 {
+    public class SongMaker
+    {
+        public Album al {get;set;} = new();
+        public TimeSpan dur { get; set; } = new();
+        public string tit { get; set; }
+    }
     // [Route("api/[controller]")]
     // [ApiController]
     public class SongController : Controller
@@ -23,24 +29,25 @@ namespace MvcRatings.Controllers
         
         public ActionResult AddSong(int id)
         {
-            var al = _context.Album.Where(a => a.Id == id);
-            return View(al);
+            SongMaker sm = new SongMaker();
+            sm.al = _context.Album.Where(a => a.Id == id).ToList().First();
+            return View(sm);
         }
         
-        public async Task<ActionResult<Album>> SaveSong(Song model)
+        public async Task<ActionResult<Album>> SaveSong(SongMaker model)
         {
             try
             {
                 Song s = new Song();
-                s.Title = model.Title;
-                s.ReleaseDate = model.ReleaseDate;
-                s.ArtistId = model.ArtistId;
-                s.AlbumId = model.AlbumId;
-                s.Duration = model.Duration;
+                s.Title = model.tit;
+                s.ReleaseDate = model.al.ReleaseDate;
+                s.ArtistId = model.al.ArtistId;
+                s.AlbumId = model.al.Id;
+                s.Duration = model.dur;
                 
                 _context.Song.Add(s);
                 _context.SaveChanges();
-                return RedirectToAction("DetailsAlbum","Album", model.AlbumId);
+                return RedirectToAction("DetailsAlbum","Album", new { id = model.al.Id});
             }
             catch (Exception ex)
             {
