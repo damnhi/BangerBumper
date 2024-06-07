@@ -1,0 +1,23 @@
+@model IEnumerable<MvcRatings.Models.Song>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Release Date</th>
+        <th>Duration</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var song in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => song.Title)</td>
+        <td>@Html.DisplayFor(modelItem => song.Artist.Name)</td>
+        <td>@Html.DisplayFor(modelItem => song.ReleaseDate)</td>
+        <td>@Html.DisplayFor(modelItem => song.Duration)</td>
+    </tr>
+    }
+    </tbody>
+</table>

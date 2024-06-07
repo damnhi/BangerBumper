@@ -26,7 +26,21 @@ namespace MvcRatings.Controllers
         {
             _context = context;
         }
+        // GET: Song/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
         
+        // POST: Song/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            var songs = await _context.Song
+                .Include(s => s.Artist) 
+                .Where(s => s.Title.Contains(SearchPhrase))
+                .ToListAsync();
+            return PartialView("_SearchResults", songs);
+        }
         public ActionResult AddSong(int id)
         {
             SongMaker sm = new SongMaker();
