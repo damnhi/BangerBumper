@@ -7,6 +7,7 @@
         <th>Artist</th>
         <th>Release Date</th>
         <th>Duration</th>
+        <th>Show Details</th>
     </tr>
     </thead>
     <tbody>
@@ -17,6 +18,9 @@
         <td>@Html.DisplayFor(modelItem => song.Artist.Name)</td>
         <td>@Html.DisplayFor(modelItem => song.ReleaseDate)</td>
         <td>@Html.DisplayFor(modelItem => song.Duration)</td>
+        <td>
+            <a type="button" class="btn btn-primary" asp-controller="Song" asp-action="DetailsSong" asp-route-id="@song.Id">Details</a>
+        </td>
     </tr>
     }
     </tbody>
