@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +11,16 @@ using MvcRatings.Data;
 
 namespace MvcRatings.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    // [Route("api/[controller]")]
+    // [ApiController]
+    public class RatingMaker
+    {
+        public Song so {get;set;} = new();
+        public Guid uid {get;set;} = new();
+        public DateTime date {get;set;} = new();
+        public int val { get; set; } = new();
+        public string com { get; set; }
+    }
     public class RatingController : Controller
     {
         private readonly ContextDb _context;
@@ -20,7 +29,47 @@ namespace MvcRatings.Controllers
         {
             _context = context;
         }
-
+        
+        public ActionResult AddRating(int id)
+        {   
+            var lol = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            foreach (Rating r in _context.Rating.Where(r => r.SongId==id))
+            {
+                if (lol == r.UserId)
+                {
+                    return RedirectToAction("DetailsSong", "Song", new { id = id });
+                }
+            }
+            RatingMaker rm = new RatingMaker();
+            
+            rm.uid = lol;
+            rm.date = DateTime.Now;
+            rm.so = _context.Song.Where(a => a.Id == id).ToList().First();
+            return View(rm);
+        }
+        
+        public async Task<ActionResult<Album>> SaveRating(RatingMaker model)
+        {
+            try
+            {
+                Rating r = new Rating();
+                r.Value = model.val;
+                r.Comment = model.com;
+                r.SongId = model.so.Id;
+                r.UserId = model.uid;
+                r.Date = model.date;
+                
+                _context.Rating.Add(r);
+                _context.SaveChanges();
+                return RedirectToAction("DetailsSong","Song", new { id = model.so.Id});
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        
         // GET: api/Rating
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rating>>> GetRating()

@@ -1,0 +1,60 @@
+@model MvcRatings.Controllers.Srate
+@{
+    ViewData["Title"] = "DetailsSong";
+}
+
+<div class="text-center">
+    <h1 class="display-3">@Html.DisplayFor(modelItem => modelItem.so[0].Title)</h1>
+    <h3 class="display-6"> by: @Html.DisplayFor(modelItem => modelItem.so[0].Artist.Name)</h3>
+    <h3 class="display-6"> from: @Html.DisplayFor(modelItem => modelItem.so[0].Album.Title)</h3>
+    <h5 class="display-10"> released on: @Html.DisplayFor(modelItem => modelItem.so[0].ReleaseDate)</h5>
+    <h5 class="display-10"> is: @Html.DisplayFor(modelItem => modelItem.so[0].Duration) long</h5>
+    <p>Bumps:</p>
+</div>
+
+<p>
+    <a type="button" class="btn btn-primary" asp-controller="Rating" asp-action="AddRating" asp-route-id="@Model.so[0].Id" >Add new BUMP</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ras[0].Value)
+        </th>
+        <th>
+            User
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ras[0].Comment)
+        </th>
+        <th>
+            Date of BUMPing
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.ras)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)
+                @Html.DisplayFor(modelItem => item.User.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div>
+    <a type="button" class="btn btn-primary" asp-controller="Album" asp-action="DetailsAlbum" asp-route-id="@Model.so[0].AlbumId" >Go back to the album</a>
+</div>

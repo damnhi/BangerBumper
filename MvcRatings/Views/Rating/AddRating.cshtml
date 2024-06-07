@@ -1,0 +1,25 @@
+@model MvcRatings.Controllers.RatingMaker
+@{
+    ViewData["Title"] = "RatingSong";
+}
+
+<h1>Add a BUMP to: @Model.so.Title </h1>
+
+<div class="container" style="width:40%;margin-top:2%">
+
+    @using (Html.BeginForm("SaveRating", "Rating", FormMethod.Post))
+    {   
+        @Html.HiddenFor(model => model.so.Id)
+        @Html.HiddenFor(model => model.date)
+        @Html.HiddenFor(model => model.uid)
+        @Html.TextBoxFor(model => model.val, new { @class = "form-control", @placeholder = "Value (1-5)" })
+        @Html.TextBoxFor(model => model.com, new { @class = "form-control", @placeholder = "Comment" })
+        <input type="submit" value="Submit" class="btn btn-block btn-primary" />
+
+    }
+
+</div>
+
+<div>
+    <a type="button" class="btn btn-primary" asp-controller="Song" asp-action="DetailsSong" asp-route-id="@Model.so.Id" >Go back to the song</a>
+</div>

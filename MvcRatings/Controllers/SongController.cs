@@ -10,6 +10,16 @@ using MvcRatings.Data;
 
 namespace MvcRatings.Controllers
 {
+    public class Srate
+    {
+        public List<Song> so {get;set;}
+        public List<Rating> ras {get;set;}
+        public Srate()
+        {
+            this.so = new List<Song>();
+            this.ras = new List<Rating>();
+        }
+    }
     public class SongMaker
     {
         public Album al {get;set;} = new();
@@ -67,6 +77,41 @@ namespace MvcRatings.Controllers
             {
                 throw ex;
             }
+        }
+        
+        public async Task<IActionResult> RemoveSong(bool confirm, int id)
+        {
+            
+                if (_context.Song == null)
+                {
+                    return NotFound();
+                }
+
+                var song = await _context.Song.FindAsync(id);
+                if (song == null)
+                {
+                    return NotFound();
+                }
+
+                int? back = song.AlbumId;
+                
+                _context.Song.Remove(song);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("DetailsAlbum","Album", new { id = back});
+            
+        }
+        public async Task<IActionResult> DetailsSong(int Id)
+        {
+            if (_context.Song == null)
+            {
+                return Problem("Entity set 'BangerBumper.Song'  is null.");
+            }
+
+            Srate sra = new Srate();
+            
+            sra.so = _context.Song.Where(a => a.Id == Id).Include(b=>b.Album).Include(o=>o.Artist).ToList();
+            sra.ras = await _context.Rating.Include(r => r.Song).Where(r => r.Song.Id == Id).Include(b=>b.User).ToListAsync();
+            return View(sra);
         }
         
         

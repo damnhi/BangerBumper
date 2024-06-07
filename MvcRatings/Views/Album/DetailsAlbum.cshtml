@@ -22,6 +22,9 @@
         <th>
             @Html.DisplayNameFor(model => model.sos[0].Duration)
         </th>
+        <th>
+            Show Details
+        </th>
         <th></th>
     </tr>
     </thead>
@@ -34,6 +37,17 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                <a type="button" class="btn btn-primary" asp-controller="Song" asp-action="DetailsSong" asp-route-id="@item.Id">Details</a>
+            </td>
+            <td>
+                @Html.ActionLink(
+                "Delete",
+                "RemoveSong",
+                "Song",
+                new { confirm = true, id = item.Id },
+                new { onclick = "return confirm('Do you really want to delete this Song?')" })
             </td>
         </tr>
     }
