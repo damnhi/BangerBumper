@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MvcRatings.Models;
 using MvcRatings.Data;
-
+using Microsoft.AspNetCore.Authorization;
 namespace MvcRatings.Controllers
 {
     public class Srate
@@ -51,13 +51,14 @@ namespace MvcRatings.Controllers
                 .ToListAsync();
             return PartialView("_SearchResults", songs);
         }
+        [Authorize]
         public ActionResult AddSong(int id)
         {
             SongMaker sm = new SongMaker();
             sm.al = _context.Album.Where(a => a.Id == id).ToList().First();
             return View(sm);
         }
-        
+        [Authorize]
         public async Task<ActionResult<Album>> SaveSong(SongMaker model)
         {
             try
@@ -78,7 +79,7 @@ namespace MvcRatings.Controllers
                 throw ex;
             }
         }
-        
+        [Authorize]
         public async Task<IActionResult> RemoveSong(bool confirm, int id)
         {
             

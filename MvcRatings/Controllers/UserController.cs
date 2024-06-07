@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MvcRatings.Models;
 using MvcRatings.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcRatings.Controllers
 {
@@ -32,7 +33,7 @@ namespace MvcRatings.Controllers
 
             return View(await users.ToListAsync());
         }
-        
+        [Authorize]
         public async Task<IActionResult> RemoveUser(bool confirm, Guid id)
         {
             if (confirm)

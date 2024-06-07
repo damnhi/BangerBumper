@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -72,6 +73,7 @@ namespace MvcRatings.Controllers
 
             return View(albums);
         }
+        [Authorize]
         public ActionResult AddAlbum()
         {
             return View();
@@ -96,14 +98,14 @@ namespace MvcRatings.Controllers
 
             }
         }
-        
+        [Authorize]
         public ActionResult EditAlbumView(int Id)
         {
             var std = _context.Album.Where(s => s.Id == Id).FirstOrDefault();
     
             return View(std);
         }
-        
+        [Authorize]
         public ActionResult EditAlbum(Album std)
         {
             var album = _context.Album.Where(s => s.Id == std.Id).FirstOrDefault();
@@ -114,7 +116,7 @@ namespace MvcRatings.Controllers
 
             return RedirectToAction("AlbumTestsView");
         }
-        
+        [Authorize]
         public async Task<IActionResult> RemoveAlbum(bool confirm, int id)
         {
             if (confirm)
@@ -169,7 +171,7 @@ namespace MvcRatings.Controllers
 
             return album;
         }
-
+        
         // PUT: api/Album/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
